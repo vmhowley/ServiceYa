@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.ibsystems.ibs" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ServiceYa</name>
+    <description>Una plataforma de multiples servicios</description>
+    <author email="info@hellsec.com" href="https://hellsec.com">
+        hellsec team
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <icon src="res/icon.png" />
+</widget>
