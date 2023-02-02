@@ -17,16 +17,17 @@
    const app = initializeApp(firebaseConfig) 
 
 
-   
+
   //lee datos de empresa
 const db = getDatabase(app);
 
-const empcount = ref(db, 'main_home' );
+const empcount = ref(db, 'main_home' )
 onValue(empcount, (snapshot) => {
-  var empCountval = snapshot.val();
+  var empCountval = snapshot.val()
+  })
 
-  for (let i = 0; i < empCountval.length - 1; i++) {
-  
+  for (let i = 0; i < empCountval.length ; i++) {
+
 const empname = ref(db, 'main_home/' + i  + '/' + '/nombre');
 onValue(empname, (snapshot) => {
   const empName = snapshot.val();
@@ -71,7 +72,7 @@ onValue(empname, (snapshot) => {
            const empimg = document.querySelector('#empImg');
            empimg.setAttribute("src",data);    
   
-  });
+ 
   });
   });
   });
@@ -79,9 +80,6 @@ onValue(empname, (snapshot) => {
   });
 
 
-   }
-});
-  
   const newcontent = elemntFromHtml(`
   <div class="item">
   <div class="single-product-wrap">
@@ -102,18 +100,16 @@ onValue(empname, (snapshot) => {
           <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
       </div>
   </div>
-  </div>`)
+  </div>
+  `)
 
-function elemntFromHtml(html){
-const template = document.createElement("template");   
-
-
-
-template.innerHTML = html.trim();
-
-return template.content.firstElementChild;
-
-}
+});
+   } 
+  function elemntFromHtml(html){
+    const template = document.createElement("template");   
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
+  }
 const parentDiv = document.getElementById("div1").parentNode;   
 const vp2 = document.getElementById("div1");  
 document.body.appendChild(newcontent)
