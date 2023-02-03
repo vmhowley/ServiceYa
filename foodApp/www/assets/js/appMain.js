@@ -25,48 +25,50 @@ var empCountlen = empCountval.length
   
 for (let i = 0; i < empCountlen ; i++) {
 
-  
-
-
 
  const newcontent = elemntFromHtml(`
-  <div class="item">
-  <div class="single-product-wrap">
-      <div class="thumb">
-          <span class="tag">15% Off</span>
-          <a id="linkHref" href="single-restuarent.html">
-              <img  id="empImg" src="" alt="img">
-          </a>
-          <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
-      </div>
-      <div class="details">
-          <h6><a id="empName" href="single-restuarent.html"></a> <span id="empStatus" style="color:red" ></span></h6>
-          <div class="ratting">
-              <i id="empRating" class="ri-star-fill ps-0"></i>
-              <span id="empRatingPeopleCount" >(6k)</span>
-              <span id="empAddress" >Av.Sarazora 102</span>
-          </div>
-          <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
-      </div>
-  </div>
-  </div>
-  <div  class="home-product-slider owl-carousel">
-  <div id="div2"></div>
-  </div>
+ <div id="div3" ></div>
+ <div  class="home-product-slider owl-carousel">
+                <div class="item">
+                    <div class="single-product-wrap">
+                        <div class="thumb">
+                            <span class="tag">15% Off</span>
+                            <a id="linkHref" href="single-restuarent.html">
+                                <img  id="empImg" src="" alt="img">
+                            </a>
+                            <a class="fav-btn" href="#"><i class="fa fa-heart"></i></a>
+                        </div>
+                        <div class="details">
+                            <h6><a id="empName" href="single-restuarent.html"></a> <span id="empStatus" style="color:red" ></span></h6>
+                            <div class="ratting">
+                                <i id="empRating" class="ri-star-fill ps-0"></i>
+                                <span id="plpRating" >(6k)</span>
+                                <span id="empAddress" >Av.Sarazora 102</span>
+                            </div>
+                            <span>20-25 Min <span class="ms-3">Free Delivery</span></span>
+                        </div>
+            </div>
   `)
+  
   if(i == 0){
-const parentDiv = document.getElementById("div1").parentNode
-const vp2 = document.getElementById("div"+i);
-document.body.appendChild(newcontent)
-parentDiv.insertBefore(newcontent, vp2)
-  }else{
-    const parentDiv = document.getElementById("div"+i).parentNode
-    const vp2 = document.getElementById("div"+i);
+    const parentDiv = document.getElementById("div0").parentNode
+    const vp2 = document.getElementById("div0")
     document.body.appendChild(newcontent)
     parentDiv.insertBefore(newcontent, vp2)
+      } else {
+        const parentDiv = document.getElementById("div0").parentNode
+        const vp2 = document.getElementById("div"+i)
+        document.body.appendChild(newcontent)
+        parentDiv.insertBefore(newcontent, vp2)
+    
+      }
+    function elemntFromHtml(html){
+    const template = document.createElement("template");   
+    template.innerHTML = html.trim();
+    return template.content.firstElementChild;
 
+    
   }
-
 
 
 const empname = ref(db, 'main_home/' + i  + '/' + '/nombre')
@@ -93,6 +95,13 @@ onValue(empname, (snapshot) => {
       empRating.innerHTML = emprating
     });
 
+    const plprating = ref(db, 'main_home/' + i  + '/' + '/plprating')
+    onValue(plprating, (snapshot) => {
+      const plprating = snapshot.val()
+      const plpRating = document.querySelector('#plpRating')
+      plpRating.innerHTML = plprating
+    });
+    
       const empaddress = ref(db, 'main_home/' + i  + '/' + '/address')
       onValue(empaddress, (snapshot) => {
         const empaddress = snapshot.val()
@@ -132,10 +141,4 @@ onValue(empname, (snapshot) => {
  
 
 
-  function elemntFromHtml(html){
-    const template = document.createElement("template");   
-    template.innerHTML = html.trim();
-    return template.content.firstElementChild;
-
-    
-  }
+  
