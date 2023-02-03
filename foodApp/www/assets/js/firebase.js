@@ -13,7 +13,7 @@
   const firebaseConfig = {
     apiKey: "AIzaSyBwtWOyTvSKPFtSRnRpE11OrUvX3bh5y8U",
     authDomain: "deliveryapp-ca6c5.firebaseapp.com",
-    databaseURL: "https://project-bc60d.firebaseio.com",
+    databaseURL: "https://deliveryapp-ca6c5-default-rtdb.firebaseio.com",
     projectId: "deliveryapp-ca6c5",
     storageBucket: "deliveryapp-ca6c5.appspot.com",
     messagingSenderId: "478233782508",

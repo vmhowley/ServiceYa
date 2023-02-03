@@ -1,29 +1,33 @@
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js"
   import { getDatabase, ref, onValue }  from  "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js"
+  import { app } from "./firebase.js"
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBwtWOyTvSKPFtSRnRpE11OrUvX3bh5y8U",
-    authDomain: "deliveryapp-ca6c5.firebaseapp.com",
-    databaseURL: "https://deliveryapp-ca6c5-default-rtdb.firebaseio.com",
-    projectId: "deliveryapp-ca6c5",
-    storageBucket: "deliveryapp-ca6c5.appspot.com",
-    messagingSenderId: "478233782508",
-    appId: "1:478233782508:web:ed7c52894a7ba9922c5dc9",
-    measurementId: "G-K2TXB7V7BJ"
-  };
-   const app = initializeApp(firebaseConfig) 
+  // const firebaseConfig = {
+  //   apiKey: "AIzaSyBwtWOyTvSKPFtSRnRpE11OrUvX3bh5y8U",
+  //   authDomain: "deliveryapp-ca6c5.firebaseapp.com",
+  //   databaseURL: "https://deliveryapp-ca6c5-default-rtdb.firebaseio.com",
+  //   projectId: "deliveryapp-ca6c5",
+  //   storageBucket: "deliveryapp-ca6c5.appspot.com",
+  //   messagingSenderId: "478233782508",
+  //   appId: "1:478233782508:web:ed7c52894a7ba9922c5dc9",
+  //   measurementId: "G-K2TXB7V7BJ"
+  // };
+  //  const app = initializeApp(firebaseConfig) 
   //lee datos de empresa
   const db = getDatabase(app);
 const empcount = ref(db, 'main_home' )
 onValue(empcount, (snapshot) => {
 const empCountval = snapshot.val()
+var empCountlen = empCountval.length 
   
-for (let i = 1; i < empCountval.length ; i++) {
+for (let i = 0; i < empCountlen ; i++) {
 
   
+
+
 
  const newcontent = elemntFromHtml(`
   <div class="item">
@@ -46,12 +50,25 @@ for (let i = 1; i < empCountval.length ; i++) {
       </div>
   </div>
   </div>
+  <div  class="home-product-slider owl-carousel">
+  <div id="div2"></div>
+  </div>
   `)
+  if(i == 0){
+const parentDiv = document.getElementById("div1").parentNode
+const vp2 = document.getElementById("div"+i);
+document.body.appendChild(newcontent)
+parentDiv.insertBefore(newcontent, vp2)
+  }else{
+    const parentDiv = document.getElementById("div"+i).parentNode
+    const vp2 = document.getElementById("div"+i);
+    document.body.appendChild(newcontent)
+    parentDiv.insertBefore(newcontent, vp2)
+
+  }
 
 
-  
 
-  
 const empname = ref(db, 'main_home/' + i  + '/' + '/nombre')
 onValue(empname, (snapshot) => {
   const empName = snapshot.val()
@@ -63,6 +80,8 @@ onValue(empname, (snapshot) => {
   onValue(empid, (snapshot) => {
       const empId = snapshot.val()
       const linkHref = document.querySelector('#linkHref')
+      const empname = document.querySelector('#empName')
+
       linkHref.setAttribute("href", "single-"+empId+".html")
       empname.setAttribute("href", "single-"+empId+".html")
   });
@@ -103,11 +122,9 @@ onValue(empname, (snapshot) => {
   
           
           });
+  
+          
 
-          const parentDiv = document.getElementById("div1").parentNode;   
-          const vp2 = document.getElementById("div1");  
-          document.body.appendChild(newcontent)
-          parentDiv.insertBefore(newcontent, vp2)
         }
 
       })
@@ -119,5 +136,6 @@ onValue(empname, (snapshot) => {
     const template = document.createElement("template");   
     template.innerHTML = html.trim();
     return template.content.firstElementChild;
+
     
   }
